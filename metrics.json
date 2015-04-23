@@ -1,0 +1,95 @@
+{
+    "result": [
+        {
+            "description": "ActiveMQ - Percentage Store In Use",
+            "displayName": "ActiveMQ - Store Used",
+            "displayNameShort": "AMQ Store",
+            "name": "ACTIVEMQ_STORE_USED",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Percentage Memory In Use",
+            "displayName": "ActiveMQ - Memory Used",
+            "displayNameShort": "AMQ Memory",
+            "name": "ACTIVEMQ_MEM_USED",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Number of Queues",
+            "displayName": "ActiveMQ - Queues",
+            "displayNameShort": "AMQ Queues",
+            "name": "ACTIVEMQ_BROKER_TOTALS_QUEUES",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Number of Topics",
+            "displayName": "ActiveMQ - Topics",
+            "displayNameShort": "AMQ Topics",
+            "name": "ACTIVEMQ_BROKER_TOTALS_TOPICS",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Number of Message Producers",
+            "displayName": "ActiveMQ - Producers",
+            "displayNameShort": "AMQ Producers",
+            "name": "ACTIVEMQ_BROKER_TOTALS_PRODUCERS",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Number of Message Consumers",
+            "displayName": "ActiveMQ - Consumers",
+            "displayNameShort": "AMQ Consumers",
+            "name": "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Total Number of Messages",
+            "displayName": "ActiveMQ - Message Count",
+            "displayNameShort": "AMQ Messages",
+            "name": "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Enqueue Total (Number of Messages Queued)",
+            "displayName": "ActiveMQ - Messages Enqueued",
+            "displayNameShort": "AMQ Enqueued",
+            "name": "ACTIVEMQ_MESSAGE_STATS_ENQUEUE",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Dequeue Total (Number of Messages Ack'ed)",
+            "displayName": "ActiveMQ - Messages Dequeued",
+            "displayNameShort": "AMQ Dequeue",
+            "name": "ACTIVEMQ_MESSAGE_STATS_DEQUEUE",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Inflight Total (Number of Messages Awaiting Acknowledgement)",
+            "displayName": "ActiveMQ - Messages Inflight",
+            "displayNameShort": "AMQ Inflight",
+            "name": "ACTIVEMQ_MESSAGE_STATS_INFLIGHT",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Dispatch Total (Number of Messages Sent to Consumers)",
+            "displayName": "ActiveMQ - Messages Dispatched",
+            "displayNameShort": "AMQ Dispatch",
+            "name": "ACTIVEMQ_MESSAGE_STATS_DISPATCH",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Expired Total (Number of Messages Expired Without Ack)",
+            "displayName": "ActiveMQ - Messages Expired",
+            "displayNameShort": "AMQ Expired",
+            "name": "ACTIVEMQ_MESSAGE_STATS_EXPIRED",
+            "unit": "number"
+        },
+        {
+            "description": "ActiveMQ - Queue Size (Number of Messages Waiting for Delivery)",
+            "displayName": "ActiveMQ - Queue Size",
+            "displayNameShort": "AMQ Queue Size",
+            "name": "ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE",
+            "unit": "number"
+        }
+    ]
+}
