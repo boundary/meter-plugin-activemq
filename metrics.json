@@ -1,134 +1,105 @@
 {
-    "result": [
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Percentage Store In Use",
-            "displayName": "ActiveMQ - Store Used",
-            "displayNameShort": "AMQ Store",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_STORE_USED",
-            "unit": "percentage"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Percentage Memory In Use",
-            "displayName": "ActiveMQ - Memory Used",
-            "displayNameShort": "AMQ Memory",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MEM_USED",
-            "unit": "percentage"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Number of Queues",
-            "displayName": "ActiveMQ - Queues",
-            "displayNameShort": "AMQ Queues",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_BROKER_TOTALS_QUEUES",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Number of Topics",
-            "displayName": "ActiveMQ - Topics",
-            "displayNameShort": "AMQ Topics",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_BROKER_TOTALS_TOPICS",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Number of Message Producers",
-            "displayName": "ActiveMQ - Producers",
-            "displayNameShort": "AMQ Producers",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_BROKER_TOTALS_PRODUCERS",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Number of Message Consumers",
-            "displayName": "ActiveMQ - Consumers",
-            "displayNameShort": "AMQ Consumers",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Total Number of Messages",
-            "displayName": "ActiveMQ - Message Count",
-            "displayNameShort": "AMQ Messages",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Enqueue Total (Number of Messages Queued)",
-            "displayName": "ActiveMQ - Messages Enqueued",
-            "displayNameShort": "AMQ Enqueued",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_ENQUEUE",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Dequeue Total (Number of Messages Ack'ed)",
-            "displayName": "ActiveMQ - Messages Dequeued",
-            "displayNameShort": "AMQ Dequeue",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_DEQUEUE",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Inflight Total (Number of Messages Awaiting Acknowledgement)",
-            "displayName": "ActiveMQ - Messages Inflight",
-            "displayNameShort": "AMQ Inflight",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_INFLIGHT",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Dispatch Total (Number of Messages Sent to Consumers)",
-            "displayName": "ActiveMQ - Messages Dispatched",
-            "displayNameShort": "AMQ Dispatch",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_DISPATCH",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Expired Total (Number of Messages Expired Without Ack)",
-            "displayName": "ActiveMQ - Messages Expired",
-            "displayNameShort": "AMQ Expired",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_EXPIRED",
-            "unit": "number"
-        },
-        {
-            "defaultAggregate": "ave",
-            "defaultResolutionMS": 1000,
-            "description": "ActiveMQ - Queue Size (Number of Messages Waiting for Delivery)",
-            "displayName": "ActiveMQ - Queue Size",
-            "displayNameShort": "AMQ Queue Size",
-            "isDisabled": false,
-            "name": "ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE",
-            "unit": "number"
-        }
-    ]
+  "ACTIVEMQ_BROKER_TOTALS_CONSUMERS": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Number of Message Consumers",
+    "displayName": "ActiveMQ - Consumers",
+    "displayNameShort": "AMQ Consumers",
+    "unit": "number"
+  },
+  "ACTIVEMQ_BROKER_TOTALS_MESSAGES": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Total Number of Messages",
+    "displayName": "ActiveMQ - Message Count",
+    "displayNameShort": "AMQ Messages",
+    "unit": "number"
+  },
+  "ACTIVEMQ_BROKER_TOTALS_PRODUCERS": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Number of Message Producers",
+    "displayName": "ActiveMQ - Producers",
+    "displayNameShort": "AMQ Producers",
+    "unit": "number"
+  },
+   "ACTIVEMQ_BROKER_TOTALS_QUEUES": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Number of Queues",
+    "displayName": "ActiveMQ - Queues",
+    "displayNameShort": "AMQ Queues",
+    "unit": "number"
+  },
+  "ACTIVEMQ_BROKER_TOTALS_TOPICS": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Number of Topics",
+    "displayName": "ActiveMQ - Topics",
+    "displayNameShort": "AMQ Topics",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MEM_USED": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Percentage Memory In Use",
+    "displayName": "ActiveMQ - Memory Used",
+    "displayNameShort": "AMQ Memory",
+    "unit": "percentage"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_DEQUEUE": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Dequeue Total (Number of Messages Ack'ed)",
+    "displayName": "ActiveMQ - Messages Dequeued",
+    "displayNameShort": "AMQ Dequeue",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_DISPATCH": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Dispatch Total (Number of Messages Sent to Consumers)",
+    "displayName": "ActiveMQ - Messages Dispatched",
+    "displayNameShort": "AMQ Dispatch",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_ENQUEUE": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Enqueue Total (Number of Messages Queued)",
+    "displayName": "ActiveMQ - Messages Enqueued",
+    "displayNameShort": "AMQ Enqueued",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_EXPIRED": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Expired Total (Number of Messages Expired Without Ack)",
+    "displayName": "ActiveMQ - Messages Expired",
+    "displayNameShort": "AMQ Expired",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_INFLIGHT": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Inflight Total (Number of Messages Awaiting Acknowledgement)",
+    "displayName": "ActiveMQ - Messages Inflight",
+    "displayNameShort": "AMQ Inflight",
+    "unit": "number"
+  },
+  "ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Queue Size (Number of Messages Waiting for Delivery)",
+    "displayName": "ActiveMQ - Queue Size",
+    "displayNameShort": "AMQ Queue Size",
+    "unit": "number"
+  "ACTIVEMQ_STORE_USED": {
+    "defaultAggregate": "avg",
+    "defaultResolutionMS": 1000,
+    "description": "ActiveMQ - Percentage Store In Use",
+    "displayName": "ActiveMQ - Store Used",
+    "displayNameShort": "AMQ Store",
+    "unit": "percentage"
+  }
 }

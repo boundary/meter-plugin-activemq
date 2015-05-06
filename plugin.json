@@ -1,71 +1,71 @@
 {
-"description": "Plugin for the ActiveMQ Message Broker",
-"icon" : "icon.png",
-"command": "boundary-meter index.lua",
-"metrics" : [
-    "ACTIVEMQ_BROKER_TOTALS_QUEUES",
-    "ACTIVEMQ_BROKER_TOTALS_TOPICS",
-    "ACTIVEMQ_BROKER_TOTALS_PRODUCERS",
+  "description": "Plugin for the ActiveMQ Message Broker",
+  "icon": "icon.png",
+  "command": "boundary-meter index.lua",
+  "metrics": [
     "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
     "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
-    "ACTIVEMQ_MESSAGE_STATS_ENQUEUE",
-    "ACTIVEMQ_MESSAGE_STATS_DEQUEUE",
-    "ACTIVEMQ_MESSAGE_STATS_INFLIGHT",
-    "ACTIVEMQ_MESSAGE_STATS_DISPATCH",
-    "ACTIVEMQ_MESSAGE_STATS_EXPIRED",
-    "ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE",
+    "ACTIVEMQ_BROKER_TOTALS_PRODUCERS",
+    "ACTIVEMQ_BROKER_TOTALS_QUEUES",
+    "ACTIVEMQ_BROKER_TOTALS_TOPICS",
     "ACTIVEMQ_MEM_USED",
+    "ACTIVEMQ_MESSAGE_STATS_DEQUEUE",
+    "ACTIVEMQ_MESSAGE_STATS_DISPATCH",
+    "ACTIVEMQ_MESSAGE_STATS_ENQUEUE",
+    "ACTIVEMQ_MESSAGE_STATS_EXPIRED",
+    "ACTIVEMQ_MESSAGE_STATS_INFLIGHT",
+    "ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE",
     "ACTIVEMQ_STORE_USED"
-],
-"postExtract" : "",
-"paramSchema": [
-{
-"title": "ActiveMQ host address",
-"name": "activeMQHost",
-"description": "Hostname of the ActiveMQ instance",
-"type": "string",
-"default": "localhost",
-"required": false
-},
-{
-"title": "ActiveMQ status port",
-"name": "activeMQPort",
-"description": "Port number of the ActiveMQ REST API server",
-"type": "number",
-"default": 8161,
-"required": false
-},
-{
-"title": "ActiveMQ broker name",
-"name": "activeMQBroker",
-"description": "Name or the ActiveMQ broker to monitor",
-"type": "string",
-"default": "localhost",
-"required": false
-},
-{
-"title": "ActiveMQ user",
-"name": "activeMQUser",
-"description": "User name for ActiveMQ REST API server",
-"type": "string",
-"default": "admin",
-"required": false
-},
-{
-"title": "ActiveMQ password",
-"name": "activeMQPass",
-"description": "Password for ActiveMQ REST API server",
-"type": "string",
-"default": "admin",
-"required": false
-},
-{
-"title": "Poll Time (msec)",
-"name": "pollInterval",
-"description": "The Poll Interval to call the command. Defaults 5 seconds",
-"type": "number",
-"default": 5000,
-"required": false
-}
-]
+  ],
+  "postExtract": "",
+  "paramSchema": [
+    {
+      "title": "ActiveMQ host address",
+      "name": "activeMQHost",
+      "description": "Hostname of the ActiveMQ instance",
+      "type": "string",
+      "default": "localhost",
+      "required": false
+    },
+    {
+      "title": "ActiveMQ status port",
+      "name": "activeMQPort",
+      "description": "Port number of the ActiveMQ REST API server",
+      "type": "number",
+      "default": 8161,
+      "required": false
+    },
+    {
+      "title": "ActiveMQ broker name",
+      "name": "activeMQBroker",
+      "description": "Name or the ActiveMQ broker to monitor",
+      "type": "string",
+      "default": "localhost",
+      "required": false
+    },
+    {
+      "title": "ActiveMQ user",
+      "name": "activeMQUser",
+      "description": "User name for ActiveMQ REST API server",
+      "type": "string",
+      "default": "admin",
+      "required": false
+    },
+    {
+      "title": "ActiveMQ password",
+      "name": "activeMQPass",
+      "description": "Password for ActiveMQ REST API server",
+      "type": "string",
+      "default": "admin",
+      "required": false
+    },
+    {
+      "title": "Poll Time (msec)",
+      "name": "pollInterval",
+      "description": "The Poll Interval to call the command. Defaults 5 seconds",
+      "type": "number",
+      "default": 5000,
+      "required": false
+    }
+  ]
 }
