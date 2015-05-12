@@ -81,10 +81,10 @@ local stats_total = clone(stats_total_tmpl)
 local function arePendingRequests() 
   -- If has any key, then there are pending requests.
   for k, v in pairs(pending_requests) do
-      return false
+      return true 
   end
 
-  return true
+  return false 
 end
 
 plugin = Plugin:new(params, ds)
