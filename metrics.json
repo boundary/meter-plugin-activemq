@@ -94,6 +94,7 @@
     "displayName": "ActiveMQ - Queue Size",
     "displayNameShort": "AMQ Queue Size",
     "unit": "number"
+  },
   "ACTIVEMQ_STORE_USED": {
     "defaultAggregate": "avg",
     "defaultResolutionMS": 1000,
