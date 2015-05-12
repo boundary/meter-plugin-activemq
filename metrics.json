@@ -45,7 +45,7 @@
     "description": "ActiveMQ - Percentage Memory In Use",
     "displayName": "ActiveMQ - Memory Used",
     "displayNameShort": "AMQ Memory",
-    "unit": "percentage"
+    "unit": "percent"
   },
   "ACTIVEMQ_MESSAGE_STATS_DEQUEUE": {
     "defaultAggregate": "avg",
@@ -101,6 +101,6 @@
     "description": "ActiveMQ - Percentage Store In Use",
     "displayName": "ActiveMQ - Store Used",
     "displayNameShort": "AMQ Store",
-    "unit": "percentage"
+    "unit": "percent"
   }
 }
