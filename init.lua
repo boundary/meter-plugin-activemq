@@ -25,14 +25,13 @@ options.host = params.activeMQHost
 options.port = params.activeMQPort
 options.auth = auth(params.activeMQUser, params.activeMQPass) 
 options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.activeMQBroker
-options.wait_for_end = true -- Please look at how it behaves with activemq
+options.wait_for_end = false
 
 local pending_requests = {}
 local plugin
 local ds = WebRequestDataSource:new(options)
 ds:chain(function (context, callback, data)
   local parsed = json.parse(data).value
-  -- Output broker metrics
   local metrics = {
     ['ACTIVEMQ_BROKER_TOTALS_QUEUES'] = #parsed.Queues,
     ['ACTIVEMQ_BROKER_TOTALS_TOPICS'] = #parsed.Topics,
@@ -44,21 +43,20 @@ ds:chain(function (context, callback, data)
   }
   plugin:report(metrics)
 
-  -- Generate child requests
   local data_sources = {}
   for _, v in ipairs(parsed.Topics) do
     local opts = clone(options)
     opts.path = "/api/jolokia/read/" .. v.objectName
-    opts.info = v.objectName
+    opts.meta = v.objectName
     local child_ds = WebRequestDataSource:new(opts)
-    child_ds:propagte('error', context)
+    child_ds:propagate('error', context)
     table.insert(data_sources, child_ds)
     pending_requests[v.objectName] = true
   end
   for _, v in ipairs(parsed.Queues) do
     local opts = clone(options)
     opts.path = "/api/jolokia/read/" .. v.objectName
-    opts.info = v.objectName
+    opts.meta = v.objectName
     local child_ds = WebRequestDataSource:new(opts)
     child_ds:propagte('error', context)
     table.insert(data_sources, child_ds)
@@ -79,11 +77,9 @@ local stats_total_tmpl = {
 local stats_total = clone(stats_total_tmpl)
 
 local function arePendingRequests() 
-  -- If has any key, then there are pending requests.
   for k, v in pairs(pending_requests) do
       return true 
   end
-
   return false 
 end
 
@@ -98,7 +94,6 @@ function plugin:onParseValues(data, extra)
   end
   pending_requests[extra.info] = nil
   if not arePendingRequests() then
-  -- all requests are done, output the stats
     metrics = {
       ['ACTIVEMQ_MESSAGE_STATS_ENQUEUE'] = stats_total.EnqueueCount,
       ['ACTIVEMQ_MESSAGE_STATS_DEQUEUE'] = stats_total.DequeueCount,

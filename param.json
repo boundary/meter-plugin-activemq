@@ -1,5 +1,5 @@
 {
-    "pollInterval":1000,
+    "pollInterval":2000,
     "activeMQHost":"localhost",
     "activeMQBroker":"localhost",
     "activeMQPort":8161,
