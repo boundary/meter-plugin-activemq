@@ -55,7 +55,7 @@
       "title": "ActiveMQ password",
       "name": "activeMQPass",
       "description": "Password for ActiveMQ REST API server",
-      "type": "string",
+      "type": "password",
       "default": "admin",
       "required": false
     },
