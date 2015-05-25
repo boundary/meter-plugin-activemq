@@ -1,7 +1,7 @@
 {
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
-  "command": "boundary-meter index.lua",
+  "command": "boundary-meter init.lua",
   "metrics": [
     "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
     "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
