@@ -10,21 +10,19 @@ local table = require('table')
 local params = framework.params
 params.name = "Boundary ActiveMQ Plugin"
 params.version = 2.0
-params.tags = "lua,plugin,activemq"
+params.tags = "activemq"
 
 params.pollInterval = notEmpty(params.pollInterval, 5000)
-params.activeMQHost = notEmpty(params.activeMQHost, "localhost")
-params.activeMQBroker = notEmpty(params.activeMQBroker, "localhost")
-params.activeMQPort = notEmpty(params.activeMQPort, 8161)
-params.activeMQUser = notEmpty(params.activeMQUser, "admin")
-params.activeMQPass = notEmpty(params.activeMQPass, "admin")
-params.source = params.activeMQBroker
+params.host = notEmpty(params.host, "localhost")
+params.broker_name = notEmpty(params.broker_name, "localhost")
+params.port = notEmpty(params.port, 8161)
+params.source = notEmpty(params.source, params.broker_name)
 
 local options = {}
-options.host = params.activeMQHost
-options.port = params.activeMQPort
-options.auth = auth(params.activeMQUser, params.activeMQPass) 
-options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.activeMQBroker
+options.host = params.host
+options.port = params.port
+options.auth = auth(params.username, params.password) 
+options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.broker_name
 options.wait_for_end = false
 
 local pending_requests = {}

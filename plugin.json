@@ -21,7 +21,7 @@
   "paramSchema": [
     {
       "title": "ActiveMQ host address",
-      "name": "activeMQHost",
+      "name": "host",
       "description": "Hostname of the ActiveMQ instance",
       "type": "string",
       "default": "localhost",
@@ -29,7 +29,7 @@
     },
     {
       "title": "ActiveMQ status port",
-      "name": "activeMQPort",
+      "name": "port",
       "description": "Port number of the ActiveMQ REST API server",
       "type": "number",
       "default": 8161,
@@ -37,7 +37,7 @@
     },
     {
       "title": "ActiveMQ broker name",
-      "name": "activeMQBroker",
+      "name": "broker_name",
       "description": "Name or the ActiveMQ broker to monitor",
       "type": "string",
       "default": "localhost",
@@ -45,7 +45,7 @@
     },
     {
       "title": "ActiveMQ user",
-      "name": "activeMQUser",
+      "name": "username",
       "description": "User name for ActiveMQ REST API server",
       "type": "string",
       "default": "admin",
@@ -53,7 +53,7 @@
     },
     {
       "title": "ActiveMQ password",
-      "name": "activeMQPass",
+      "name": "password",
       "description": "Password for ActiveMQ REST API server",
       "type": "password",
       "default": "admin",
