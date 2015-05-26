@@ -1,3 +1,17 @@
+-- Copyright 2015 Boundary, Inc.
+--
+-- Licensed under the Apache License, Version 2.0 (the "License");
+-- you may not use this file except in compliance with the License.
+-- You may obtain a copy of the License at
+--
+--    http://www.apache.org/licenses/LICENSE-2.0
+--
+-- Unless required by applicable law or agreed to in writing, software
+-- distributed under the License is distributed on an "AS IS" BASIS,
+-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-- See the License for the specific language governing permissions and
+-- limitations under the License.
+
 local framework = require('framework')
 local json = require('json')
 local Plugin = framework.Plugin
@@ -10,22 +24,27 @@ local table = require('table')
 local params = framework.params
 params.name = "Boundary ActiveMQ Plugin"
 params.version = 2.0
-params.tags = "lua,plugin,activemq"
+params.tags = "activemq"
 
 params.pollInterval = notEmpty(params.pollInterval, 5000)
-params.activeMQHost = notEmpty(params.activeMQHost, "localhost")
-params.activeMQBroker = notEmpty(params.activeMQBroker, "localhost")
-params.activeMQPort = notEmpty(params.activeMQPort, 8161)
-params.activeMQUser = notEmpty(params.activeMQUser, "admin")
-params.activeMQPass = notEmpty(params.activeMQPass, "admin")
-params.source = params.activeMQBroker
+params.host = notEmpty(params.host, "localhost")
+params.broker_name = notEmpty(params.broker_name, "localhost")
+params.port = notEmpty(params.port, 8161)
+params.source = notEmpty(params.source, params.broker_name)
 
 local options = {}
-options.host = params.activeMQHost
-options.port = params.activeMQPort
-options.auth = auth(params.activeMQUser, params.activeMQPass) 
-options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.activeMQBroker
+options.host = params.host
+options.port = params.port
+options.auth = auth(params.username, params.password) 
+options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.broker_name
 options.wait_for_end = false
+
+local function childDataSource(object)
+  local opts = clone(options)
+  opts.path = "/api/jolokia/read/" .. object 
+  opts.meta = object
+  return WebRequestDataSource:new(opts)
+end
 
 local pending_requests = {}
 local plugin
@@ -45,20 +64,14 @@ ds:chain(function (context, callback, data)
 
   local data_sources = {}
   for _, v in ipairs(parsed.Topics) do
-    local opts = clone(options)
-    opts.path = "/api/jolokia/read/" .. v.objectName
-    opts.meta = v.objectName
-    local child_ds = WebRequestDataSource:new(opts)
+    local child_ds = childDataSource(v.objectName)
     child_ds:propagate('error', context)
     table.insert(data_sources, child_ds)
     pending_requests[v.objectName] = true
   end
   for _, v in ipairs(parsed.Queues) do
-    local opts = clone(options)
-    opts.path = "/api/jolokia/read/" .. v.objectName
-    opts.meta = v.objectName
-    local child_ds = WebRequestDataSource:new(opts)
-    child_ds:propagte('error', context)
+    local child = childDataSource(v.objectName)
+    child_ds:propagate('error', context)
     table.insert(data_sources, child_ds)
     pending_requests[v.objectName] = true
   end
@@ -109,3 +122,4 @@ function plugin:onParseValues(data, extra)
 end
 
 plugin:run()
+

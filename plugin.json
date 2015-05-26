@@ -1,7 +1,7 @@
 {
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
-  "command": "boundary-meter index.lua",
+  "command": "boundary-meter init.lua",
   "metrics": [
     "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
     "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
@@ -18,10 +18,14 @@
     "ACTIVEMQ_STORE_USED"
   ],
   "postExtract": "",
+  "dashboards" : [
+      { "name" : "ActiveMQ Summary",
+        "layout" : "d-w=4&d-h=4&d-pad=5&d-bg=none&d-g-ACTIVEMQ_BROKER_TOTALS_CONSUMERS=0-0-1-1&d-g-ACTIVEMQ_BROKER_TOTALS_MESSAGES=1-0-1-1&d-g-ACTIVEMQ_BROKER_TOTALS_PRODUCERS=2-0-1-1&d-g-ACTIVEMQ_BROKER_TOTALS_QUEUES=3-0-1-1&d-g-ACTIVEMQ_BROKER_TOTALS_TOPICS=0-1-1-1&d-g-ACTIVEMQ_MEM_USED=1-1-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_DEQUEUE=2-1-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_DISPATCH=3-1-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_ENQUEUE=0-2-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_EXPIRED=1-2-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_INFLIGHT=2-2-1-1&d-g-ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE=3-2-1-1&d-g-ACTIVEMQ_STORE_USED=0-3-1-1"
+  }],
   "paramSchema": [
     {
       "title": "ActiveMQ host address",
-      "name": "activeMQHost",
+      "name": "host",
       "description": "Hostname of the ActiveMQ instance",
       "type": "string",
       "default": "localhost",
@@ -29,7 +33,7 @@
     },
     {
       "title": "ActiveMQ status port",
-      "name": "activeMQPort",
+      "name": "port",
       "description": "Port number of the ActiveMQ REST API server",
       "type": "number",
       "default": 8161,
@@ -37,7 +41,7 @@
     },
     {
       "title": "ActiveMQ broker name",
-      "name": "activeMQBroker",
+      "name": "broker_name",
       "description": "Name or the ActiveMQ broker to monitor",
       "type": "string",
       "default": "localhost",
@@ -45,7 +49,7 @@
     },
     {
       "title": "ActiveMQ user",
-      "name": "activeMQUser",
+      "name": "username",
       "description": "User name for ActiveMQ REST API server",
       "type": "string",
       "default": "admin",
@@ -53,9 +57,9 @@
     },
     {
       "title": "ActiveMQ password",
-      "name": "activeMQPass",
+      "name": "password",
       "description": "Password for ActiveMQ REST API server",
-      "type": "string",
+      "type": "password",
       "default": "admin",
       "required": false
     },
