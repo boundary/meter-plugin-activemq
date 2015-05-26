@@ -1,10 +1,11 @@
-# Boundary ActiveMQ Plugin
+Boundary ActiveMQ Plugin
+========================
 
 This plugin grabs metrics from the ActiveMQ node where it is started and parses the data to be able to integrate into boundary.
 
-## Prerequisites
+### Prerequisites
 
-### Supported OS
+#### Supported OS
 
 |     OS    | Linux | Windows | SmartOS | OS X |
 |:----------|:-----:|:-------:|:-------:|:----:|
@@ -21,20 +22,16 @@ None
 
 ### Plugin Configuration Fields
 
-#### For All Versions
-
 |Field Name    |Description                                              |
 |:-------------|:--------------------------------------------------------|
 |pollInterval  |How often should metrics be gathered from ActiveMQ?      |
-|activeMQHost  |The server from which ActiveMQ stats should be gathered  |
-|activeMQBroker|The name of the ActiveMQ broker which should be monitored|
-|activeMQPort  |The port on which ActiveMQ metrics can be retrieved      |
-|activeMQUser  |The administrative user which can gather ActiveMQ metrics|
-|activeMQPass  |The password for the administrative user                 |
+|host  |The server from which ActiveMQ stats should be gathered  |
+|broker_name |The name of the ActiveMQ broker which should be monitored|
+|port  |The port on which ActiveMQ metrics can be retrieved      |
+|username  |The administrative user which can gather ActiveMQ metrics|
+|password  |The password for the administrative user                 |
 
 ### Metrics Collected
-
-#### For All Versions
 
 |Metric Name             |Description                                                                |
 |:--------------------------------|:------------------------------------------------------------------------|
@@ -51,3 +48,10 @@ None
 |ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE|The total queue size of queues managed by ActiveMQ on this node          |
 |ACTIVEMQ_MEM_USED                |The total memory used by ActiveMQ on this node                           |
 |ACTIVEMQ_STORE_USED              |The total storage used by ActiveMQ on this node                          |
+
+### Dashboards
+
+
+### References
+
+None
