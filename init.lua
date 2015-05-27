@@ -17,6 +17,7 @@ local json = require('json')
 local Plugin = framework.Plugin
 local notEmpty = framework.string.notEmpty
 local WebRequestDataSource = framework.WebRequestDataSource 
+local hasAny = framework.table.hasAny
 local auth = framework.util.auth
 local clone = framework.table.clone
 local table = require('table')
@@ -89,13 +90,6 @@ local stats_total_tmpl = {
 
 local stats_total = clone(stats_total_tmpl)
 
-local function arePendingRequests() 
-  for k, v in pairs(pending_requests) do
-      return true 
-  end
-  return false 
-end
-
 plugin = Plugin:new(params, ds)
 function plugin:onParseValues(data, extra)
   local parsed = json.parse(data).value
@@ -106,7 +100,7 @@ function plugin:onParseValues(data, extra)
     stats_total[k] = v + tonumber(parsed[k]) or 0
   end
   pending_requests[extra.info] = nil
-  if not arePendingRequests() then
+  if not hasAny(pending_requests) then
     metrics = {
       ['ACTIVEMQ_MESSAGE_STATS_ENQUEUE'] = stats_total.EnqueueCount,
       ['ACTIVEMQ_MESSAGE_STATS_DEQUEUE'] = stats_total.DequeueCount,

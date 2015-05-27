@@ -1,9 +1,9 @@
 {
     "pollInterval":2000,
-    "activeMQHost":"localhost",
-    "activeMQBroker":"localhost",
-    "activeMQPort":8161,
-    "activeMQUser":"admin",
-    "activeMQPass":"admin"
+    "host":"localhost",
+    "broker_name":"localhost",
+    "port":8161,
+    "username":"admin",
+    "password":"admin"
 }
 
