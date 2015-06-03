@@ -27,6 +27,7 @@ local timer = require('timer')
 local math = require('math')
 local string = require('string')
 local os = require('os')
+local fs = require('fs')
 local http = require('http')
 local https = require('https')
 local net = require('net')
@@ -41,7 +42,10 @@ local boundary = require('boundary')
 
 framework.version = '0.9.2'
 framework.boundary = boundary
-framework.params = boundary.param or {}
+framework.params = boundary.param or json.parse(fs.readFileSync('param.json')) or {}
+framework.plugin_params = boundary.plugin or json.parse(fs.readFileSync('plugin.json')) or {}
+framework.metrics = boundary.metrics or json.parse(fs.readFileSync('metrics.json')) or {}
+local plugin_params = framework.plugin_params
 
 framework.string = {}
 framework.functional = {}
@@ -553,7 +557,6 @@ end
 function framework.util.currentTimestamp()
   return os.time()
 end
-local currentTimestamp = framework.util.currentTimestamp
 
 --- Convert megabytes to bytes.
 -- @param mb the number of megabytes
@@ -588,7 +591,7 @@ end
 -- @param type could be 'CRITICAL', 'ERROR', 'WARN', 'INFO'
 function framework.util.eventString(type, message, tags)
   tags = tags or ''
-  return string.format('_bevent: %s |t:%s|tags:%s', message, type, tags)
+  return string.format('_bevent:%s|t:%s|tags:%s', message, type, tags)
 end
 local eventString = framework.util.eventString
 
@@ -638,6 +641,21 @@ function framework.table.get(key, t)
   return t[key]
 end
 
+--- Find a value inside a table
+-- @param a predicate function that test the items of the table
+-- @return the first item in the table that satisfy the test condition
+function framework.table.find(func, t)
+  for i, v in pairs(t) do
+    if func(v, i, t) then
+      return v, i 
+    end
+  end
+  return nil
+end
+
+--- Get the number of elements of a table
+-- @param t a table
+-- @return the number of items from the table
 function framework.table.count(t)
   local count = 0
   for _ in pairs(t) do
@@ -646,6 +664,28 @@ function framework.table.count(t)
   return count
 end
 
+function framework.util.add(a, b)
+  return a + b
+end
+local add = framework.util.add 
+
+--- Get the mean value of the elements from a table
+-- @param t a table 
+-- @return the mean value 
+local reduce = framework.functional.reduce
+function framework.util.mean(t)
+  local count = table.getn(t) 
+  if count == 0 then
+    return 0
+  end
+  local sum = reduce(add, 0, t) 
+  return sum/count
+end
+
+
+--- Get returns true if there is any element in the table.
+-- @param t a table
+-- @return true if there is any element in the table, false otherwise
 function framework.table.hasAny(t)
   return next(t) ~= nil
 end
@@ -951,6 +991,7 @@ local DataSourcePoller = Emitter:extend()
 -- @name DataSourcePoller:new
 function DataSourcePoller:initialize(pollInterval, dataSource)
   self.pollInterval = pollInterval
+  if self.pollInterval < 500 then self.pollInterval = self.pollInterval * 1000 end
   self.dataSource = dataSource
   dataSource:propagate('error', self)
 end
@@ -991,6 +1032,8 @@ function Plugin:initialize(params, dataSource)
   assert(dataSource, 'Plugin:new dataSource is required.')
 
   local pollInterval = params.pollInterval or 1000
+  if pollInterval < 500 then pollInterval = pollInterval * 1000 end
+
   if not Plugin:_isPoller(dataSource) then
     self.dataSource = DataSourcePoller:new(pollInterval, dataSource)
     self.dataSource:propagate('error', self)
@@ -998,33 +1041,43 @@ function Plugin:initialize(params, dataSource)
     self.dataSource = dataSource
   end
   self.source = notEmpty(params.source, os.hostname())
-  self.version = params.version or '1.0'
-  self.name = params.name or 'Boundary Plugin'
-  self.tags = params.tags or ''
+  if (plugin_params) then
+    self.version = notEmpty(plugin_params.version, notEmpty(params.version, '0.0'))
+    self.name = notEmpty(plugin_params.name, notEmpty(params.name, 'Boundary Plugin'))
+    self.tags = notEmpty(plugin_params.tags, notEmpty(params.tags, ''))
+  else
+    self.version = notEmpty(params.version, '0.0')
+    self.name = notEmpty(params.name, 'Boundary Plugin')
+    self.tags = notEmpty(params.tags, '')
+  end
 
   dataSource:propagate('error', self)
 
   self:on('error', function (err) self:error(err) end)
 end
 
-function Plugin:printError(err)
-  self:printEvent('error', err)
+function Plugin:printError(title, host, source, err)
+  self:printEvent('error', title, host, source, err)
 end
 
-function Plugin:printInfo(msg)
-  self:printEvent('info', msg)
+function Plugin:printInfo(title, host, source, msg)
+  self:printEvent('info', title, host, source, msg)
 end
 
-function Plugin:printWarn(msg)
-  self:printEvent('warn', msg)
+function Plugin:printWarn(title, host, source, msg)
+  self:printEvent('warn', title, host, source, msg)
 end
 
-function Plugin:printCritical(msg)
-  self:printEvent('critical', msg)
+function Plugin:printCritical(title, host, source, msg)
+  self:printEvent('critical', title, host, source, msg)
 end
 
-function Plugin.formatMessage(name, version, msg)
-  return string.format('%s version %s: %s', name, version, msg)
+function Plugin.formatMessage(name, version, title, host, source, msg)
+  if title and title ~= "" then title = '-'..title else title = "" end
+  if msg and msg ~= "" then msg = '|m:'..msg else msg = "" end
+  if host and host ~= "" then host = '|h:'..host else host = "" end
+  if source and source ~= "" then source = '|s:'..source else source = "" end
+  return string.format('%s version %s%s%s%s%s', name, version, title, msg, host, source)
 end
 
 function Plugin.formatTags(tags)
@@ -1035,8 +1088,8 @@ function Plugin.formatTags(tags)
   return table.concat(merge({'lua', 'plugin'}, tags), ',')
 end
 
-function Plugin:printEvent(eventType, msg)
-  msg = Plugin.formatMessage(self.name, self.version, msg)
+function Plugin:printEvent(eventType, title, host, source, msg)
+  msg = Plugin.formatMessage(self.name, self.version, title, host, source, msg)
   local tags = Plugin.formatTags(self.tags)
   print(eventString(eventType, msg, tags))
 end
@@ -1044,8 +1097,8 @@ end
 --- Emit an event to the Boundary platform. 
 -- @type a string that represent the type of the event. It can be 'info', 'warning', 'critical', 'error'.
 -- @param msg an string message to send
-function Plugin:emitEvent(type, msg)
-  self:printEvent(type, msg)
+function Plugin:emitEvent(type, title, host, source, msg)
+  self:printEvent(type, title, host, source, msg)
 end
 
 function Plugin:_isPoller(poller)
@@ -1061,12 +1114,12 @@ function Plugin:error(err)
   else
     msg = tostring(err)
   end
-  self:printError(msg)
+  self:printError(self.source .. ' Error', self.source, self.source, msg)
 end
 
 --- Run the plugin and start polling from the configured DataSource
 function Plugin:run()
-  self:printInfo('Up')
+  self:printInfo(self.source .. ' Status', self.source, self.source, 'Up')
   self.dataSource:run(function (...) self:parseValues(...) end)
 end
 
@@ -1099,21 +1152,21 @@ function Plugin:onReport(metrics)
   for metric, v in pairs(metrics) do
     -- { { metric, value .. }, { metric, value .. } }
     if type(metric) == 'number' then
-      print(self:format(v.metric, v.value, notEmpty(v.source, self.source), v.timestamp or currentTimestamp()))
+      print(self:format(v.metric, v.value, notEmpty(v.source, self.source), v.timestamp))
     elseif type(v) ~= 'table' then
-      print(self:format(metric, v, self.source, currentTimestamp()))
+      print(self:format(metric, v, self.source))
     elseif type(v[1]) ~= 'table' and v.value then
       -- looking for { metric = { value, source, timestamp }}
       local source = v.source or self.source
       local value = v.value
-      local timestamp = v.timestamp or currentTimestamp()
+      local timestamp = v.timestamp
       print(self:format(metric, value, source, timestamp))
     else
       -- looking for { metric = {{ value, source, timestamp }}}
       for _, j in pairs(v) do
         local source = j.source or self.source
         local value = j.value
-        local timestamp = j.timestamp or currentTimestamp()
+        local timestamp = j.timestamp
         print(self:format(metric, value, source, timestamp))
       end
     end
@@ -1132,7 +1185,11 @@ end
 -- @param timestamp the time the metric was retrieved
 -- You can override this on your plugin instance.
 function Plugin:onFormat(metric, value, source, timestamp)
-  return string.format('%s %f %s %s', metric, value, source, timestamp)
+  if timestamp then
+    return string.format('%s %f %s %s', metric, value, source, timestamp)
+  else
+    return string.format('%s %f %s', metric, value, source)
+  end
 end
 
 --- Acumulator Class

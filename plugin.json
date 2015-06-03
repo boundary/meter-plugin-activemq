@@ -1,4 +1,7 @@
 {
+  "name" : "Boundary ActiveMQ Plugin",
+  "version" : "2.0",
+  "tags" : "activemq",
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
   "command": "boundary-meter init.lua",

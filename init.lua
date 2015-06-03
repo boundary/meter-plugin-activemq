@@ -23,9 +23,6 @@ local clone = framework.table.clone
 local table = require('table')
 
 local params = framework.params
-params.name = "Boundary ActiveMQ Plugin"
-params.version = 2.0
-params.tags = "activemq"
 
 params.pollInterval = notEmpty(params.pollInterval, 5000)
 params.host = notEmpty(params.host, "localhost")
