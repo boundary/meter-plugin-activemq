@@ -1,8 +1,8 @@
 {
   "name" : "Boundary ActiveMQ Plugin",
-  "version" : "0.9.0",
+  "version" : "0.9.1",
   "meterVersionRequired" : "4.2.0-611",
-  "os" : [ "Linux", "Windows", "SmartOS", "OS X" ],
+  "unsupportedPlatforms" : [ ],
   "tags" : "activemq",
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
