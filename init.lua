@@ -68,7 +68,7 @@ ds:chain(function (context, callback, data)
     pending_requests[v.objectName] = true
   end
   for _, v in ipairs(parsed.Queues) do
-    local child = childDataSource(v.objectName)
+    local child_ds = childDataSource(v.objectName)
     child_ds:propagate('error', context)
     table.insert(data_sources, child_ds)
     pending_requests[v.objectName] = true
