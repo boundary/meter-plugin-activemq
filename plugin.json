@@ -40,7 +40,7 @@
       "title": "ActiveMQ status port",
       "name": "port",
       "description": "Port number of the ActiveMQ REST API server",
-      "type": "number",
+      "type": "integer",
       "default": 8161,
       "required": false
     },
@@ -71,8 +71,8 @@
     {
       "title": "Poll Time (msec)",
       "name": "pollInterval",
-      "description": "The Poll Interval to call the command. Defaults 5 seconds",
-      "type": "number",
+      "description": "The Poll Interval to call the command.",
+      "type": "integer",
       "default": 5000,
       "required": false
     }
