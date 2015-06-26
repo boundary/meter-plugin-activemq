@@ -1,5 +1,4 @@
-Boundary ActiveMQ Plugin
-========================
+# Boundary ActiveMQ Plugin
 
 This plugin grabs metrics from the ActiveMQ node where it is started and parses the data to be able to integrate into boundary.
 
@@ -13,8 +12,8 @@ This plugin grabs metrics from the ActiveMQ node where it is started and parses 
 
 #### Boundary Meter Versions v4.2 or later
 
-- To install new meter go to Settings->Installation or [see instructons](https://help.boundary.com/hc/en-us/sections/200634331-Installation). 
-- To upgrade the meter to the latest version - [see instructons](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
+- To install new meter go to Settings->Installation or [see instructions](https://help.boundary.com/hc/en-us/sections/200634331-Installation). 
+- To upgrade the meter to the latest version - [see instructions](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
 
 ### Plugin Setup
 
