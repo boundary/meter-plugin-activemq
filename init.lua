@@ -13,7 +13,6 @@
 -- limitations under the License.
 
 local framework = require('framework')
-local json = require('json')
 local Plugin = framework.Plugin
 local notEmpty = framework.string.notEmpty
 local WebRequestDataSource = framework.WebRequestDataSource 
@@ -21,6 +20,8 @@ local hasAny = framework.table.hasAny
 local auth = framework.util.auth
 local clone = framework.table.clone
 local table = require('table')
+local parseJson = framework.util.parseJson
+local get = framework.table.get
 
 local params = framework.params
 
@@ -48,10 +49,15 @@ local pending_requests = {}
 local plugin
 local ds = WebRequestDataSource:new(options)
 ds:chain(function (context, callback, data)
-  local parsed = json.parse(data).value
+  local success, parsed = parseJson(data)
+  if not success then
+    context:emit('error', 'Can not parse metrics. Verify configuration parameters.')
+    return
+  end
+  parsed = get('value', parsed)
   local metrics = {
-    ['ACTIVEMQ_BROKER_TOTALS_QUEUES'] = #parsed.Queues,
-    ['ACTIVEMQ_BROKER_TOTALS_TOPICS'] = #parsed.Topics,
+    ['ACTIVEMQ_BROKER_TOTALS_QUEUES'] = parsed.Queues and #parsed.Queues,
+    ['ACTIVEMQ_BROKER_TOTALS_TOPICS'] = parsed.Topics and #parsed.Topics,
     ['ACTIVEMQ_BROKER_TOTALS_PRODUCERS'] = parsed.TotalProducerCount,
     ['ACTIVEMQ_BROKER_TOTALS_CONSUMERS'] = parsed.TotalConsumerCount,
     ['ACTIVEMQ_BROKER_TOTALS_MESSAGES'] = parsed.TotalMessageCount,
@@ -89,7 +95,12 @@ local stats_total = clone(stats_total_tmpl)
 
 plugin = Plugin:new(params, ds)
 function plugin:onParseValues(data, extra)
-  local parsed = json.parse(data).value
+  local success, parsed = parseJson(data)
+  if not success then
+    self:error('Can not parse metrics. Verify configuration parameters.')  
+    return
+  end
+  parsed = get('value', parsed)
   local metrics = {}
 
   -- Sum up all the stats
