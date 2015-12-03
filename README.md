@@ -1,6 +1,6 @@
-# Boundary ActiveMQ Plugin
+# TrueSight Pulse ActiveMQ Meter Plugin
 
-This plugin grabs metrics from the ActiveMQ node where it is started and parses the data to be able to integrate into boundary.
+This meter plugin collects metrics from the ActiveMQ node using the embedded [Jolokia](https://jolokia.org/) instance that allows measurement collection via a REST API.
 
 ### Prerequisites
 
@@ -10,10 +10,10 @@ This plugin grabs metrics from the ActiveMQ node where it is started and parses 
 |:----------|:-----:|:-------:|:-------:|:----:|
 | Supported |   v   |    v    |    v    |  v   |
 
-#### Boundary Meter Versions v4.2 or later
+#### TrueSight Pulse Meter Versions V4.2 or later
 
-- To install new meter go to Settings->Installation or [see instructions](https://help.boundary.com/hc/en-us/sections/200634331-Installation). 
-- To upgrade the meter to the latest version - [see instructions](https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter).
+- To install new meter go to Settings->Installation or [see instructons|https://help.boundary.com/hc/en-us/sections/200634331-Installation].
+- To upgrade the meter to the latest version - [see instructons|https://help.boundary.com/hc/en-us/articles/201573102-Upgrading-the-Boundary-Meter].
 
 ### Plugin Setup
 
