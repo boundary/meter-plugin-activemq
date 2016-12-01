@@ -1,12 +1,12 @@
 {
   "name" : "Boundary ActiveMQ Plugin",
-  "version" : "0.9.2",
-  "meterVersionRequired" : "4.2.0-611",
+  "version" : "0.9.3",
+  "meterVersionRequired" : "4.5.0-778",
   "unsupportedPlatforms" : [ ],
   "tags" : "activemq",
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
-  "command": "boundary-meter init.lua",
+  "command": "truesight-luvit init.lua",
   "metrics": [
     "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
     "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
@@ -34,7 +34,7 @@
       "description": "Hostname of the ActiveMQ instance",
       "type": "string",
       "default": "127.0.0.1",
-      "required": true 
+      "required": true
     },
     {
       "title": "ActiveMQ status port",
@@ -42,7 +42,7 @@
       "description": "Port number of the ActiveMQ REST API server",
       "type": "integer",
       "default": 8161,
-      "required": true 
+      "required": true
     },
     {
       "title": "ActiveMQ broker name",

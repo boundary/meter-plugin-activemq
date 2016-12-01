@@ -15,7 +15,7 @@
 local framework = require('framework')
 local Plugin = framework.Plugin
 local notEmpty = framework.string.notEmpty
-local WebRequestDataSource = framework.WebRequestDataSource 
+local WebRequestDataSource = framework.WebRequestDataSource
 local hasAny = framework.table.hasAny
 local auth = framework.util.auth
 local clone = framework.table.clone
@@ -34,13 +34,13 @@ params.source = notEmpty(params.source, params.broker_name)
 local options = {}
 options.host = params.host
 options.port = params.port
-options.auth = auth(params.username, params.password) 
+options.auth = auth(params.username, params.password)
 options.path = "/api/jolokia/read/org.apache.activemq:type=Broker,brokerName=" .. params.broker_name
-options.wait_for_end = false
+options.wait_for_end = true
 
 local function childDataSource(object)
   local opts = clone(options)
-  opts.path = "/api/jolokia/read/" .. object 
+  opts.path = "/api/jolokia/read/" .. object
   opts.meta = object
   return WebRequestDataSource:new(opts)
 end
@@ -97,7 +97,7 @@ plugin = Plugin:new(params, ds)
 function plugin:onParseValues(data, extra)
   local success, parsed = parseJson(data)
   if not success then
-    self:error('Can not parse metrics. Verify configuration parameters.')  
+    self:error('Can not parse metrics. Verify configuration parameters.')
     return
   end
   parsed = get('value', parsed)
@@ -117,7 +117,7 @@ function plugin:onParseValues(data, extra)
       ['ACTIVEMQ_MESSAGE_STATS_EXPIRED'] = stats_total.ExpiredCount,
       ['ACTIVEMQ_MESSAGE_STATS_QUEUE_SIZE'] = stats_total.QueueSize
     }
-    stats_total = clone(stats_total_tmpl) 
+    stats_total = clone(stats_total_tmpl)
   end
 
   return metrics

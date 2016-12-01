@@ -1,5 +1,5 @@
 {
-    "pollInterval":2000,
+    "pollInterval":5000,
     "host":"localhost",
     "broker_name":"localhost",
     "port":8161,
