@@ -29,7 +29,7 @@ params.pollInterval = notEmpty(params.pollInterval, 5000)
 params.host = notEmpty(params.host, "localhost")
 params.broker_name = notEmpty(params.broker_name, "localhost")
 params.port = notEmpty(params.port, 8161)
-params.source = notEmpty(params.source, params.broker_name)
+params.source = notEmpty(params.sourceName, params.broker_name)
 
 local options = {}
 options.host = params.host
