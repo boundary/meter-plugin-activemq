@@ -69,6 +69,14 @@
       "required": false
     },
     {
+      "title": "Source Name",
+      "name": "sourceName",
+      "description": "Source name to be displayed for the metrics.",
+      "type": "string",
+      "default": "",
+      "required": true
+   },
+    {
       "title": "Poll Time (ms)",
       "name": "pollInterval",
       "description": "The Poll Interval (in milliseconds) to call the command.",
