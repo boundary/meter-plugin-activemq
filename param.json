@@ -3,7 +3,8 @@
     "host":"localhost",
     "broker_name":"localhost",
     "port":8161,
-    "username":"admin",
-    "password":"admin"
+    "username":"admin",    
+    "password":"admin",
+    "sourceName":"source"
 }
 

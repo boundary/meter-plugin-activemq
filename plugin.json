@@ -50,7 +50,7 @@
       "description": "Name or the ActiveMQ broker to monitor",
       "type": "string",
       "default": "localhost",
-      "required": false
+      "required": true
     },
     {
       "title": "ActiveMQ user",
@@ -68,6 +68,14 @@
       "default": "admin",
       "required": false
     },
+    {
+      "title": "Source Name",
+      "name": "sourceName",
+      "description": "Source name to be displayed for the metrics.",
+      "type": "string",
+      "default": "",
+      "required": true
+   },
     {
       "title": "Poll Time (ms)",
       "name": "pollInterval",
