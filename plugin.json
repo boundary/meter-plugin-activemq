@@ -50,7 +50,7 @@
       "description": "Name or the ActiveMQ broker to monitor",
       "type": "string",
       "default": "localhost",
-      "required": false
+      "required": true
     },
     {
       "title": "ActiveMQ user",
