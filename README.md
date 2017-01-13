@@ -29,7 +29,7 @@ None
 |port  |The port on which ActiveMQ metrics can be retrieved      |
 |username  |The administrative user which can gather ActiveMQ metrics|
 |password  |The password for the administrative user                 |
-|sourceName |The source name to be displayed for each metrics. |
+|sourceName |The source name to be displayed for each metric |
 
 ### Metrics Collected
 
