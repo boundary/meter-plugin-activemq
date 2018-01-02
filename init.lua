@@ -22,8 +22,15 @@ local clone = framework.table.clone
 local table = require('table')
 local parseJson = framework.util.parseJson
 local get = framework.table.get
+local json = require('json')
+local env = require('env')
 
-local params = framework.params
+local params = env.get("TSP_PLUGIN_PARAMS")
+if(params == nil or  params == '') then
+   params = framework.params
+else
+   params = json.parse(params)
+end
 
 params.pollInterval = notEmpty(params.pollInterval, 5000)
 params.host = notEmpty(params.host, "localhost")

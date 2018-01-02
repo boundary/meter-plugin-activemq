@@ -1,12 +1,13 @@
 {
   "name" : "Boundary ActiveMQ Plugin",
-  "version" : "0.9.3",
+  "version" : "0.9.4",
   "meterVersionRequired" : "4.5.0-778",
   "unsupportedPlatforms" : [ ],
   "tags" : "activemq",
   "description": "Plugin for the ActiveMQ Message Broker",
   "icon": "icon.png",
   "command": "truesight-luvit init.lua",
+  "secure": true,
   "metrics": [
     "ACTIVEMQ_BROKER_TOTALS_CONSUMERS",
     "ACTIVEMQ_BROKER_TOTALS_MESSAGES",
